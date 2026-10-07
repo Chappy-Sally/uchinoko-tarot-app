@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>チャッピー＆サリーの今日の1枚</title>
+<title>今日の1枚</title>
 
 <style>
 body{
@@ -203,12 +203,12 @@ button{
 
 <div id="home" class="main-card">
 
-  <h1>🌈 チャッピー＆サリーの<br>今日の1枚</h1>
+  <h1>🌈 <span id="petName"></span><br>今日の1枚</h1>
 
   <img
+    id="heroImage"
     class="hero-img"
-    src="https://chappy-sally.github.io/tarot-reading/Images/cs_hyoushi_tarot.png?v=1"
-    alt="チャッピー＆サリーの今日の1枚"
+    alt="今日の1枚"
   >
 
   <p class="desc">
@@ -223,7 +223,7 @@ button{
   </div>
 
   <button class="menuBackBtn"
-onclick="location.href='https://chappy-sally.github.io/chappysally-menu/'">
+onclick="location.href=tarotData.menuUrl">
 🏠 しあわせメニューに戻る
   </button>
 
@@ -252,26 +252,6 @@ onclick="location.href='https://chappy-sally.github.io/chappysally-menu/'">
     もう一度引く🌈
   </button>
 
-  <div class="promo-box">
-    <div class="promo-title">
-      もっと詳しく受け取りたい時は✨
-    </div>
-
-    <div class="promo-text">
-      「タロットリーディング」では、<br>
-      今日の1枚だけでなく、<br>
-      3枚引き・5枚引き・7枚引き、<br>
-      A/Bセレクト、相性占いも楽しめます😊<br><br>
-      AIに結果を送って、<br>
-      今の自分に必要なメッセージを<br>
-      やさしく受け取れるアプリです🌈
-    </div>
-
-    <button class="link-btn" onclick="location.href='https://ChappySally.base.shop/items/151505028'">
-      タロットリーディングアプリへ✨
-    </button>
-  </div>
-
   <button class="back" onclick="backHome()">
     戻る
   </button>
@@ -280,33 +260,16 @@ onclick="location.href='https://chappy-sally.github.io/chappysally-menu/'">
 
 </div>
 
+<script src="cards-data.js"></script>
 <script>
-const baseUrl = "https://chappy-sally.github.io/tarot-reading/Images/";
+const baseUrl = "cards/";
 
-const cards = [
-  ["00_The_Fool.png","愚者","今日は軽くはじめて大丈夫😊\n完璧じゃなくても、まず一歩でOK🌈"],
-  ["01_The_Magician.png","魔術師","あなたの中には、もう必要な力があるよ✨\nできることから形にしてみてね😊"],
-  ["02_The_High_Priestess.png","女教皇","今日は静かな直感を大切にしてね🌙\n答えは心の奥からそっと届くよ😊"],
-  ["03_The_Empress.png","女帝","やさしさと豊かさを受け取る日🌸\n自分にもあたたかくしてあげてね😊"],
-  ["04_The_Emperor.png","皇帝","今日は土台を整えると安心できそう😊\n小さな決めごとが力になるよ🌈"],
-  ["05_The_Hierophant.png","教皇","信頼できるものを大切にしてね🌿\nひとりで抱えず、やさしい知恵を受け取ろう😊"],
-  ["06_The_Lovers.png","恋人","今日は心がよろこぶ方を選んでみて💗\n小さな好きが、道しるべになるよ😊"],
-  ["07_The_Chariot.png","戦車","流れに乗って進める日✨\n考えすぎる前に、軽く動いてみてね😊"],
-  ["08_Strength.png","力","本当の強さは、やさしさの中にあるよ🦁\n無理せず、穏やかに進もうね😊"],
-  ["09_The_Hermit.png","隠者","今日は少し内側を見つめる時間を🌙\n静けさの中に、大切な気づきがあるよ😊"],
-  ["10_Wheel_of_Fortune.png","運命の輪","流れが動き出すタイミングかも🌈\n小さなチャンスに気づいてね😊"],
-  ["11_Justice.png","正義","今日はバランスを整える日⚖️\n自分にとって心地よい答えを選んでね😊"],
-  ["12_The_Hanged_Man.png","吊るされた男","今は急がなくても大丈夫🌿\n見方を変えると、楽になることがあるよ😊"],
-  ["13_Death.png","死神","終わりは新しいはじまりのサイン🌈\nもう合わないものは、やさしく手放してね😊"],
-  ["14_Temperance.png","節制","今日は無理なく整える日🌿\nちょうどいいペースを大切にしてね😊"],
-  ["15_The_Devil.png","悪魔","気づいたら、もう抜け出す力は戻ってるよ😊\n自分を責めずに、ゆるめていこう🌈"],
-  ["16_The_Tower.png","塔","変化は怖く見えても、整うきっかけになるよ⚡\n深呼吸して、今できることからで大丈夫😊"],
-  ["17_The_Star.png","星","希望の光はちゃんとあるよ🌟\n今日は未来を少し信じてみてね😊"],
-  ["18_The_Moon.png","月","不安な時ほど、やさしく確認してね🌙\nまだ決めなくても大丈夫だよ😊"],
-  ["19_The_Sun.png","太陽","今日は明るいエネルギーを受け取る日☀️\n笑顔になれることを大切にしてね😊"],
-  ["20_Judgement.png","審判","もう一度、自分の声を聞いてみて📯\n目覚めるタイミングが来ているかも😊"],
-  ["21_The_World.png","世界","ここまでよく来たね🌈\nひとつの流れが整って、次へ進めそうだよ😊"]
-];
+const cards = tarotData.cards;
+const petName = tarotData.petName ? tarotData.petName + "の" : "";
+document.getElementById("petName").textContent = petName;
+document.title = petName + "今日の1枚";
+document.getElementById("heroImage").src = tarotData.heroImage;
+document.getElementById("heroImage").alt = document.title;
 
 const luckyHints = [
   "🎨 今日のラッキーカラー\nピンク：やさしい気持ちを思い出せそう💗",
@@ -333,9 +296,9 @@ function drawCard(){
   document.getElementById("home").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
 
-  document.getElementById("cardImage").src = baseUrl + card[0];
-  document.getElementById("cardName").textContent = card[1];
-  document.getElementById("messageBox").textContent = card[2];
+  document.getElementById("cardImage").src = baseUrl + card.image;
+  document.getElementById("cardName").textContent = card.name;
+  document.getElementById("messageBox").textContent = card.message;
   document.getElementById("luckyBox").textContent = "✨今日のプチヒント✨\n" + lucky;
 
   window.scrollTo(0,0);
