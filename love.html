@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>相性しあわせ診断</title>
+
+<style>
+body{
+  margin:0;
+  padding:20px 14px 40px;
+  background:#fff5fb;
+  font-family:"Hiragino Kaku Gothic ProN",sans-serif;
+  text-align:center;
+  color:#6b4b2a;
+}
+
+.wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+
+.main-card{
+  width:92%;
+  max-width:620px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:28px;
+  padding:24px 16px 28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+h1{
+  color:#8a58e6;
+  font-size:28px;
+  line-height:1.5;
+}
+
+.desc{
+  color:#7b5b39;
+  font-size:16px;
+  line-height:1.9;
+}
+
+input{
+  width:88%;
+  max-width:360px;
+  padding:15px;
+  border:2px solid #f3b6d0;
+  border-radius:20px;
+  font-size:17px;
+  box-sizing:border-box;
+  margin-bottom:16px;
+}
+
+.label{
+  color:#8a58e6;
+  font-weight:bold;
+  margin:18px 0 8px;
+  font-size:17px;
+}
+
+button{
+  width:88%;
+  max-width:340px;
+  margin:14px auto 0;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:16px 12px;
+  font-size:17px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+}
+
+.link-btn{
+  background:linear-gradient(135deg,#f7d774,#e6b84d,#fff1a8);
+  color:#7b5b39;
+}
+
+.hidden{
+  display:none;
+}
+
+.result-box{
+  background:white;
+  border-radius:24px;
+  padding:20px 16px;
+  margin:20px auto;
+  max-width:500px;
+  color:#df5d97;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  white-space:pre-line;
+}
+
+.sub-box{
+  background:#fffdf4;
+  border:2px dashed #f3d27a;
+  border-radius:22px;
+  padding:16px 14px;
+  margin:18px auto;
+  max-width:500px;
+  color:#7b5b39;
+  font-size:15px;
+  line-height:1.8;
+  white-space:pre-line;
+}
+
+.hero-img{
+  width:92%;
+  max-width:420px;
+  border-radius:24px;
+  margin:10px auto 20px;
+  display:block;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="inputScreen" class="main-card">
+
+  <h1>💕 相性しあわせ診断</h1>
+
+  <img
+    class="hero-img"
+    src="Images/cs_lovely_tarot_1.png"
+    alt="相性診断"
+  >
+
+  <p class="desc">
+    ふたりのお誕生日から<br>
+    相性や今の流れをやさしく見ていくよ😊
+  </p>
+
+  <div class="label">あなたのお誕生日</div>
+  <input type="date" id="myBirthday">
+
+  <div class="label">相手のお誕生日</div>
+  <input type="date" id="partnerBirthday">
+
+  <button onclick="diagnoseLove()">
+    相性をみる💕
+  </button>
+
+  <button class="back" onclick="location.href='index.html'">
+    戻る
+  </button>
+
+</div>
+
+<div id="resultScreen" class="main-card hidden">
+
+  <h1>💕 相性診断結果</h1>
+
+  <div id="resultBox" class="result-box"></div>
+
+  <div id="hintBox" class="sub-box"></div>
+
+  <button class="link-btn"
+  onclick="location.href='https://ChappySally.base.shop/items/144938615'">
+    タロットリーディングへ🌈
+  </button>
+
+  <button class="back" onclick="backInput()">
+    戻る
+  </button>
+
+</div>
+
+</div>
+
+<script>
+const messages = [
+  "今は『安心して話すこと』が大切な流れだよ😊",
+  "ふたりの間に、やさしい理解が育っていきそう🌸",
+  "少し距離をゆるめると、自然な流れに戻りやすいよ🌿",
+  "考えすぎるより、素直な気持ちが鍵になりそう💗",
+  "今は結果より、安心感を大切にすると整いやすいよ✨",
+  "ふたりのペースの違いを認めると楽になりそう😊",
+  "やさしい言葉が、流れを大きく変えてくれそう🌈"
+];
+
+function getNumber(dateStr){
+  const nums = dateStr.replaceAll("-","").split("").map(Number);
+  let sum = nums.reduce((a,b)=>a+b,0);
+
+  while(sum > 9){
+    sum = String(sum)
+      .split("")
+      .map(Number)
+      .reduce((a,b)=>a+b,0);
+  }
+
+  return sum;
+}
+
+function diagnoseLove(){
+
+  const my = document.getElementById("myBirthday").value;
+  const partner = document.getElementById("partnerBirthday").value;
+
+  if(!my || !partner){
+    alert("ふたりのお誕生日を入れてね😊");
+    return;
+  }
+
+  const myNum = getNumber(my);
+  const partnerNum = getNumber(partner);
+
+  const compatibility = (myNum + partnerNum) % 9 || 9;
+
+  let level = "";
+
+  if(compatibility <= 3){
+    level = "ゆっくり育てる相性🌱";
+  }else if(compatibility <= 6){
+    level = "バランスを学ぶ相性🌈";
+  }else{
+    level = "自然に引き合いやすい相性💞";
+  }
+
+  const randomMessage =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  document.getElementById("inputScreen")
+    .classList.add("hidden");
+
+  document.getElementById("resultScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("resultBox").textContent =
+`ふたりの9マス相性は…
+
+${compatibility}
+
+${level}
+
+${randomMessage}`;
+
+  document.getElementById("hintBox").textContent =
+`💕 しあわせヒント 💕
+
+「どちらが正しいか」より、
+「ふたりが安心できるか」を大切にすると
+流れが整いやすいよ😊`;
+
+  window.scrollTo(0,0);
+}
+
+function backInput(){
+  document.getElementById("resultScreen")
+    .classList.add("hidden");
+
+  document.getElementById("inputScreen")
+    .classList.remove("hidden");
+
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>私のしあわせ診断</title>
+
+<style>
+body{
+  margin:0;
+  padding:20px 14px 40px;
+  background:#fff5fb;
+  font-family:"Hiragino Kaku Gothic ProN",sans-serif;
+  text-align:center;
+  color:#6b4b2a;
+}
+
+.wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+
+.main-card{
+  width:92%;
+  max-width:620px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:28px;
+  padding:24px 16px 28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+h1{
+  color:#8a58e6;
+  font-size:28px;
+  line-height:1.5;
+}
+
+.desc{
+  color:#7b5b39;
+  font-size:16px;
+  line-height:1.8;
+}
+
+input{
+  width:88%;
+  max-width:360px;
+  padding:15px;
+  border:2px solid #f3b6d0;
+  border-radius:20px;
+  font-size:17px;
+  box-sizing:border-box;
+}
+
+button{
+  width:88%;
+  max-width:340px;
+  margin:14px auto 0;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:16px 12px;
+  font-size:17px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+}
+
+.hidden{
+  display:none;
+}
+
+.result-box{
+  background:white;
+  border-radius:24px;
+  padding:20px 16px;
+  margin:20px auto;
+  max-width:500px;
+  color:#df5d97;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  white-space:pre-line;
+}
+
+.sub-box{
+  background:#fffdf4;
+  border:2px dashed #f3d27a;
+  border-radius:22px;
+  padding:16px 14px;
+  margin:18px auto;
+  max-width:500px;
+  color:#7b5b39;
+  font-size:15px;
+  line-height:1.8;
+  white-space:pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="inputScreen" class="main-card">
+  <h1>🌈 私のしあわせ診断</h1>
+
+  <p class="desc">
+    お誕生日から<br>
+    あなたの星座と9マスを見て<br>
+    今のしあわせヒントを受け取ろう🐶💕
+  </p>
+
+  <p class="desc"><b>お誕生日を入れてね</b></p>
+
+  <input type="date" id="birthday">
+
+  <button onclick="diagnose()">
+    診断する✨
+  </button>
+
+  <button class="back" onclick="location.href='index.html'">
+    戻る
+  </button>
+</div>
+
+<div id="resultScreen" class="main-card hidden">
+  <h1>🌈 診断結果</h1>
+
+  <div id="resultBox" class="result-box"></div>
+  <div id="hintBox" class="sub-box"></div>
+
+  <button class="back" onclick="backInput()">
+    戻る
+  </button>
+</div>
+
+</div>
+
+<script>
+const types = {
+  1:["はじまりの人","今日は小さな一歩がしあわせの扉を開く日😊"],
+  2:["やさしさの人","人とのつながりが、あなたの心をあたためてくれる日💕"],
+  3:["よろこびの人","楽しいこと・笑えることが運気を軽くしてくれる日🌈"],
+  4:["安心の人","土台を整えると、心がほっと落ち着く日🌿"],
+  5:["自由の人","いつもと少し違う選択が、流れを変えてくれる日✨"],
+  6:["愛の人","自分にもまわりにも、やさしさを向けると整う日💗"],
+  7:["内なる光の人","静かな時間の中に、大切な気づきがある日🌙"],
+  8:["豊かさの人","受け取ることを許すと、流れが大きく動きやすい日✨"],
+  9:["完成と手放しの人","もう合わないものを手放すと、新しい流れが入る日🌸"]
+};
+
+function getNumber(dateStr){
+  const nums = dateStr.replaceAll("-","").split("").map(Number);
+  let sum = nums.reduce((a,b)=>a+b,0);
+  while(sum > 9){
+    sum = String(sum).split("").map(Number).reduce((a,b)=>a+b,0);
+  }
+  return sum;
+}
+
+function getZodiac(month,day){
+  const signs = [
+    ["山羊座",120],
+    ["水瓶座",219],
+    ["魚座",321],
+    ["牡羊座",420],
+    ["牡牛座",521],
+    ["双子座",622],
+    ["蟹座",723],
+    ["獅子座",823],
+    ["乙女座",923],
+    ["天秤座",1024],
+    ["蠍座",1123],
+    ["射手座",1222],
+    ["山羊座",1232]
+  ];
+
+  const md = month * 100 + day;
+
+  for(let i=0; i<signs.length; i++){
+    if(md < signs[i][1]) return signs[i][0];
+  }
+}
+
+function diagnose(){
+  const birthday = document.getElementById("birthday").value;
+
+  if(!birthday){
+    alert("お誕生日を入れてね😊");
+    return;
+  }
+
+  const d = new Date(birthday);
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+
+  const zodiac = getZodiac(month,day);
+  const num = getNumber(birthday);
+  const type = types[num];
+
+  document.getElementById("inputScreen").classList.add("hidden");
+  document.getElementById("resultScreen").classList.remove("hidden");
+
+  document.getElementById("resultBox").textContent =
+`${zodiac} × 9マス ${num}
+
+あなたは
+「${type[0]}」タイプです🌈
+
+${type[1]}`;
+
+  document.getElementById("hintBox").textContent =
+`今日のしあわせヒント🐾
+
+がんばって答えを出すより、
+今の自分が少しホッとする方を
+選んでみてね😊`;
+
+  window.scrollTo(0,0);
+}
+
+function backInput(){
+  document.getElementById("resultScreen").classList.add("hidden");
+  document.getElementById("inputScreen").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>チャッピー＆サリーの今日の1枚</title>
+
+<style>
+body{
+  margin:0;
+  padding:20px 14px 40px;
+  background:#fff5fb;
+  font-family:"Hiragino Kaku Gothic ProN",sans-serif;
+  text-align:center;
+  color:#6b4b2a;
+}
+
+.wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+
+.main-card{
+  width:92%;
+  max-width:620px;
+  margin:0 auto;
+  background:#fff4f8;
+  border-radius:28px;
+  padding:24px 16px 28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+h1{
+  color:#6946d8;
+  font-size:28px;
+  line-height:1.5;
+  margin:0 0 18px;
+}
+
+.desc{
+  color:#7b5b39;
+  font-size:16px;
+  line-height:1.8;
+  margin:0 0 18px;
+}
+
+.hero-img{
+  width:90%;
+  max-width:420px;
+  border-radius:22px;
+  margin:12px auto 22px;
+  display:block;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+button{
+  width:88%;
+  max-width:340px;
+  margin:12px auto 0;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:16px 12px;
+  font-size:17px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.link-btn{
+  background:linear-gradient(135deg,#f7d774,#e6b84d,#fff1a8);
+  color:#7b5b39;
+  box-shadow:0 0 18px rgba(255,215,100,0.45);
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+}
+
+.hidden{
+  display:none;
+}
+
+.card{
+  max-width:240px;
+  margin:0 auto 16px;
+}
+
+.card img{
+  width:100%;
+  border-radius:18px;
+  display:block;
+}
+
+.card-name{
+  margin-top:10px;
+  font-size:17px;
+  font-weight:bold;
+  color:#6946d8;
+}
+
+.message-box{
+  background:white;
+  border-radius:24px;
+  padding:18px 16px;
+  margin:18px auto 16px;
+  max-width:480px;
+  color:#df5d97;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  white-space:pre-line;
+}
+
+.lucky-box{
+  background:#fffdf4;
+  border-radius:22px;
+  padding:16px 14px;
+  margin:0 auto 24px;
+  max-width:480px;
+  color:#8a6235;
+  font-size:16px;
+  font-weight:bold;
+  line-height:1.8;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  border:2px dashed #f3d27a;
+  white-space:pre-line;
+}
+
+.small-note{
+  font-size:14px;
+  color:#7b5b39;
+  line-height:1.8;
+  margin:18px auto 0;
+  max-width:480px;
+}
+
+.promo-box{
+  background:#fffdf4;
+  border:2px solid #f3d27a;
+  border-radius:24px;
+  padding:18px 14px;
+  margin:24px auto 10px;
+  max-width:500px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.promo-title{
+  color:#6946d8;
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+
+.promo-text{
+  color:#7b5b39;
+  font-size:15px;
+  line-height:1.8;
+  margin-bottom:14px;
+}
+
+.menuBackBtn{
+  width:80%;
+  max-width:320px;
+  margin:18px auto 0;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:14px 12px;
+  font-size:16px;
+  font-weight:bold;
+  color:#5c3a1e;
+  background:linear-gradient(90deg,#ffd1e6,#ffe8b5);
+  box-shadow:0 5px 12px rgba(0,0,0,0.10);
+}
+
+@media(max-width:480px){
+  h1{
+    font-size:25px;
+  }
+
+  .desc,
+  .small-note,
+  .promo-text{
+    font-size:15px;
+  }
+
+  button{
+    font-size:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="home" class="main-card">
+
+  <h1>🌈 チャッピー＆サリーの<br>今日の1枚</h1>
+
+  <img
+    class="hero-img"
+    src="https://chappy-sally.github.io/tarot-reading/Images/cs_hyoushi_tarot.png?v=1"
+    alt="チャッピー＆サリーの今日の1枚"
+  >
+
+  <p class="desc">
+    今日のあなたに届く<br>
+    やさしいメッセージを受け取ってね😊
+  </p>
+
+  <button onclick="drawCard()">
+    今日の1枚を引く🌈
+  </button>
+
+  </div>
+
+  <button class="menuBackBtn"
+onclick="location.href='https://chappy-sally.github.io/chappysally-menu/'">
+🏠 しあわせメニューに戻る
+  </button>
+
+  <p class="small-note">
+    これは「当てる占い」ではなく、<br>
+    今の自分をやさしく整えるための<br>
+    小さなメッセージです🐾
+  </p>
+
+</div>
+
+<div id="result" class="main-card hidden">
+
+  <h1>🌈 今日の1枚</h1>
+
+  <div class="card">
+    <img id="cardImage" alt="今日のカード">
+    <div id="cardName" class="card-name"></div>
+  </div>
+
+  <div id="messageBox" class="message-box"></div>
+
+  <div id="luckyBox" class="lucky-box"></div>
+
+  <button onclick="drawCard()">
+    もう一度引く🌈
+  </button>
+
+  <div class="promo-box">
+    <div class="promo-title">
+      もっと詳しく受け取りたい時は✨
+    </div>
+
+    <div class="promo-text">
+      「タロットリーディング」では、<br>
+      今日の1枚だけでなく、<br>
+      3枚引き・5枚引き・7枚引き、<br>
+      A/Bセレクト、相性占いも楽しめます😊<br><br>
+      AIに結果を送って、<br>
+      今の自分に必要なメッセージを<br>
+      やさしく受け取れるアプリです🌈
+    </div>
+
+    <button class="link-btn" onclick="location.href='https://ChappySally.base.shop/items/151505028'">
+      タロットリーディングアプリへ✨
+    </button>
+  </div>
+
+  <button class="back" onclick="backHome()">
+    戻る
+  </button>
+
+</div>
+
+</div>
+
+<script>
+const baseUrl = "https://chappy-sally.github.io/tarot-reading/Images/";
+
+const cards = [
+  ["00_The_Fool.png","愚者","今日は軽くはじめて大丈夫😊\n完璧じゃなくても、まず一歩でOK🌈"],
+  ["01_The_Magician.png","魔術師","あなたの中には、もう必要な力があるよ✨\nできることから形にしてみてね😊"],
+  ["02_The_High_Priestess.png","女教皇","今日は静かな直感を大切にしてね🌙\n答えは心の奥からそっと届くよ😊"],
+  ["03_The_Empress.png","女帝","やさしさと豊かさを受け取る日🌸\n自分にもあたたかくしてあげてね😊"],
+  ["04_The_Emperor.png","皇帝","今日は土台を整えると安心できそう😊\n小さな決めごとが力になるよ🌈"],
+  ["05_The_Hierophant.png","教皇","信頼できるものを大切にしてね🌿\nひとりで抱えず、やさしい知恵を受け取ろう😊"],
+  ["06_The_Lovers.png","恋人","今日は心がよろこぶ方を選んでみて💗\n小さな好きが、道しるべになるよ😊"],
+  ["07_The_Chariot.png","戦車","流れに乗って進める日✨\n考えすぎる前に、軽く動いてみてね😊"],
+  ["08_Strength.png","力","本当の強さは、やさしさの中にあるよ🦁\n無理せず、穏やかに進もうね😊"],
+  ["09_The_Hermit.png","隠者","今日は少し内側を見つめる時間を🌙\n静けさの中に、大切な気づきがあるよ😊"],
+  ["10_Wheel_of_Fortune.png","運命の輪","流れが動き出すタイミングかも🌈\n小さなチャンスに気づいてね😊"],
+  ["11_Justice.png","正義","今日はバランスを整える日⚖️\n自分にとって心地よい答えを選んでね😊"],
+  ["12_The_Hanged_Man.png","吊るされた男","今は急がなくても大丈夫🌿\n見方を変えると、楽になることがあるよ😊"],
+  ["13_Death.png","死神","終わりは新しいはじまりのサイン🌈\nもう合わないものは、やさしく手放してね😊"],
+  ["14_Temperance.png","節制","今日は無理なく整える日🌿\nちょうどいいペースを大切にしてね😊"],
+  ["15_The_Devil.png","悪魔","気づいたら、もう抜け出す力は戻ってるよ😊\n自分を責めずに、ゆるめていこう🌈"],
+  ["16_The_Tower.png","塔","変化は怖く見えても、整うきっかけになるよ⚡\n深呼吸して、今できることからで大丈夫😊"],
+  ["17_The_Star.png","星","希望の光はちゃんとあるよ🌟\n今日は未来を少し信じてみてね😊"],
+  ["18_The_Moon.png","月","不安な時ほど、やさしく確認してね🌙\nまだ決めなくても大丈夫だよ😊"],
+  ["19_The_Sun.png","太陽","今日は明るいエネルギーを受け取る日☀️\n笑顔になれることを大切にしてね😊"],
+  ["20_Judgement.png","審判","もう一度、自分の声を聞いてみて📯\n目覚めるタイミングが来ているかも😊"],
+  ["21_The_World.png","世界","ここまでよく来たね🌈\nひとつの流れが整って、次へ進めそうだよ😊"]
+];
+
+const luckyHints = [
+  "🎨 今日のラッキーカラー\nピンク：やさしい気持ちを思い出せそう💗",
+  "🎨 今日のラッキーカラー\n水色：心を軽くしてくれそう🩵",
+  "🎨 今日のラッキーカラー\nゴールド：小さな豊かさに気づけそう✨",
+  "🎨 今日のラッキーカラー\n白：気持ちをリセットできそう🤍",
+  "🎨 今日のラッキーカラー\nラベンダー：深呼吸したくなる色だよ🌿",
+  "🍰 今日のラッキーフード\n甘いもの：ほっとする時間をくれそう😊",
+  "🍓 今日のラッキーフード\nいちご：かわいい気分を思い出せそう🍓",
+  "🍵 今日のラッキーフード\nあたたかい飲み物：心がゆるみそう☕",
+  "🍙 今日のラッキーフード\nおにぎり：安心感をくれそう🍙",
+  "🍊 今日のラッキーフード\n柑橘系：気分を軽くしてくれそう🍊",
+  "👜 今日のラッキーアイテム\nお気に入りのハンカチ：安心のお守りになりそう🌿",
+  "💎 今日のラッキーアイテム\nキラキラしたもの：気分を上げてくれそう✨",
+  "📱 今日のラッキーアイテム\nスマホ：うれしい情報に出会えるかも😊",
+  "🗝️ 今日のラッキーアイテム\n鍵：新しい流れを開くサインかも🗝️",
+  "🌸 今日のラッキーアイテム\nお花モチーフ：やさしく整えてくれそう🌸"
+];
+
+function drawCard(){
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  const lucky = luckyHints[Math.floor(Math.random() * luckyHints.length)];
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("cardImage").src = baseUrl + card[0];
+  document.getElementById("cardName").textContent = card[1];
+  document.getElementById("messageBox").textContent = card[2];
+  document.getElementById("luckyBox").textContent = "✨今日のプチヒント✨\n" + lucky;
+
+  window.scrollTo(0,0);
+}
+
+function backHome(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
