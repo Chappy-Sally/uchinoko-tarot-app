@@ -222,11 +222,6 @@ button{
 
   </div>
 
-  <button class="menuBackBtn"
-onclick="location.href=tarotData.menuUrl">
-🏠 しあわせメニューに戻る
-  </button>
-
   <p class="small-note">
     これは「当てる占い」ではなく、<br>
     今の自分をやさしく整えるための<br>
@@ -292,13 +287,15 @@ const luckyHints = [
 function drawCard(){
   const card = cards[Math.floor(Math.random() * cards.length)];
   const lucky = luckyHints[Math.floor(Math.random() * luckyHints.length)];
+  const isReversed = Math.random() < 0.5;
 
   document.getElementById("home").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
 
   document.getElementById("cardImage").src = baseUrl + card.image;
-  document.getElementById("cardName").textContent = card.name;
-  document.getElementById("messageBox").textContent = card.message;
+  document.getElementById("cardImage").style.transform = isReversed ? "rotate(180deg)" : "none";
+  document.getElementById("cardName").textContent = card.name + (isReversed ? "・逆位置" : "・正位置");
+  document.getElementById("messageBox").textContent = isReversed ? card.reversedMessage : card.message;
   document.getElementById("luckyBox").textContent = "✨今日のプチヒント✨\n" + lucky;
 
   window.scrollTo(0,0);
